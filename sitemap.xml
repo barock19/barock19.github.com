@@ -1,23 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://rocks.github.com/blog/2012/10/16/title/</loc>
-        <lastmod>2012-10-19T08:48:37+07:00</lastmod>
+        <loc>http://barock19.github.com/blog/2012/10/19/first-post/</loc>
+        <lastmod>2012-10-19T09:39:33+07:00</lastmod>
     </url>
     <url>
-        <loc>http://rocks.github.com/blog/2012/10/16/first-time/</loc>
+        <loc>
+            http://barock19.github.com/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/
+        </loc>
+        <lastmod>2012-10-19T10:47:34+07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://barock19.github.com/404.html</loc>
         <lastmod>2012-10-19T08:35:09+07:00</lastmod>
     </url>
     <url>
-        <loc>http://rocks.github.com/404.html</loc>
-        <lastmod>2012-10-19T08:35:09+07:00</lastmod>
+        <loc>http://barock19.github.com/blog/archives/</loc>
+        <lastmod>2012-10-19T10:47:34+07:00</lastmod>
     </url>
     <url>
-        <loc>http://rocks.github.com/blog/archives/</loc>
-        <lastmod>2012-10-19T08:48:37+07:00</lastmod>
-    </url>
-    <url>
-        <loc>http://rocks.github.com/</loc>
-        <lastmod>2012-10-19T08:48:37+07:00</lastmod>
+        <loc>http://barock19.github.com/</loc>
+        <lastmod>2012-10-19T10:47:34+07:00</lastmod>
     </url>
 </urlset>

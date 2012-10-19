@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[$./rock]]></title>
-  <link href="http://barock19.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: rails | $./rock]]></title>
+  <link href="http://barock19.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://barock19.github.com/"/>
   <updated>2012-10-19T10:47:34+07:00</updated>
   <id>http://barock19.github.com/</id>
@@ -100,15 +100,6 @@ end
 </code></pre>
 
 <p>ini contoh sederhana aja. mungkin lo juga sering nemuin case yang lebih complex lagi yang membuat model harus bisa punya method request, sesssion, params langsung didalam model itu sendiri. tanpa harus passing argument ke model itu lewat controller</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[first post]]></title>
-    <link href="http://barock19.github.com/blog/2012/10/19/first-post/"/>
-    <updated>2012-10-19T09:37:00+07:00</updated>
-    <id>http://barock19.github.com/blog/2012/10/19/first-post</id>
-    <content type="html"><![CDATA[<p>Hollaaa &#8230;</p>
 ]]></content>
   </entry>
   

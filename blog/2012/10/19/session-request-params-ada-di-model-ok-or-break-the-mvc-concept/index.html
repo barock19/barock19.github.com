@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>$./rock</title>
+	<title>session, request, params ada di Model. OK or break the MVC concept - $./rock</title>
 	<meta name="author" content="Zidni Mubarock">
 
 	
@@ -27,13 +27,9 @@
 
 
 </header>
-	<div id="content" class="inner">
-
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/">Session, Request, Params Ada Di Model. OK or Break the MVC Concept</a></h1>
-	<div class="entry-content">
-		<pre><code>class ApplicationController &lt; ActionController::Base
+	<div id="content" class="inner"><article class="post">
+	<h1 class="title">Session, Request, Params Ada Di Model. OK or Break the MVC Concept</h1>
+	<div class="entry-content"><pre><code>class ApplicationController &lt; ActionController::Base
     around_filter :_controller_for_model
 
     ....
@@ -115,36 +111,33 @@ end
 </code></pre>
 
 <p>ini contoh sederhana aja. mungkin lo juga sering nemuin case yang lebih complex lagi yang membuat model harus bisa punya method request, sesssion, params langsung didalam model itu sendiri. tanpa harus passing argument ke model itu lewat controller</p>
-
-		
-		
-	</div>
+</div>
 
 
 <div class="meta">
 	
 </div></article>
 
-
-    <article class="post">
-	<h1 class="title"><a href="/blog/2012/10/19/first-post/">First Post</a></h1>
-	<div class="entry-content">
-		<p>Hollaaa &#8230;</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
 	
-</div></article>
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
 
-<nav id="pagenavi">
-    
-    
-    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
-</nav></div>
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
 	<!-- 
 		
 <div id="banner" class="inner">
@@ -180,7 +173,10 @@ end
       var disqus_shortname = 'barock19';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://barock19.github.com/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/';
+        var disqus_url = 'http://barock19.github.com/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
