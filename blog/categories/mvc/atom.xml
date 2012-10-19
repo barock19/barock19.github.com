@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MVC | Rock]]></title>
   <link href="http://barock19.github.com/blog/categories/mvc/atom.xml" rel="self"/>
   <link href="http://barock19.github.com/"/>
-  <updated>2012-10-19T14:51:58+07:00</updated>
+  <updated>2012-10-19T15:13:09+07:00</updated>
   <id>http://barock19.github.com/</id>
   <author>
     <name><![CDATA[Zidni Mubarock]]></name>
@@ -41,6 +41,8 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;around_filter :_controller_for_model</span>
@@ -63,9 +65,15 @@
 </span><span class='line'><span class="sr">end</span>
 </span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="sr">&lt;p&gt;end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-klo lo modif ApplicationController kaya diatas, Model lo bakal punya method controller yang bisa punya isinya session, request dan params</p>
+</span><span class='line'><span class="sr">&lt;p&gt;end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!--more-->
+
+
+<p>klo lo modif ApplicationController kaya diatas, Model lo bakal punya method controller yang bisa punya isinya session, request dan params</p>
 
 <p>MVC, Model View Controller. adalah sebuah concept yang ngebantu developer, memisahkan antara logic, design dan Representasi data storage. konsep ini keren bgt, apalagi kalo applikasi yang dikembangkan oleh team yang masing-masing udah punya job desc-nya sendiri - sendiri. Yang designer, urusannya di View, Programmer di Controller dan Model.</p>
 

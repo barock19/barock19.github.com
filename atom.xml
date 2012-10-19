@@ -4,7 +4,7 @@
   <title><![CDATA[Rock]]></title>
   <link href="http://barock19.github.com/atom.xml" rel="self"/>
   <link href="http://barock19.github.com/"/>
-  <updated>2012-10-19T14:51:58+07:00</updated>
+  <updated>2012-10-19T15:13:09+07:00</updated>
   <id>http://barock19.github.com/</id>
   <author>
     <name><![CDATA[Zidni Mubarock]]></name>
@@ -61,6 +61,11 @@
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
 
 
 <p>klo lo modif ApplicationController kaya diatas, Model lo bakal punya method controller yang bisa punya isinya session, request dan params</p>

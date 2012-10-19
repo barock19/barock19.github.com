@@ -51,6 +51,17 @@ class ApplicationController &lt; ActionController::Base around_filter :_controll
 
     <article class="post">
 	<h1 class="title"><a href="/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/">Session, Request, Params Ada Di Model. OK or Break the MVC Concept</a></h1>
+	<div class="meta">
+		<span class="date">2012-10-19 09:45:00 +0700</span>
+		<span class="tags">
+
+
+	<a class='category' href='/blog/categories/mvc/'>MVC</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</span>
+	    
+	</div>
 	<div class="entry-content">
 		
 
@@ -97,106 +108,11 @@ class ApplicationController &lt; ActionController::Base around_filter :_controll
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>klo lo modif ApplicationController kaya diatas, Model lo bakal punya method controller yang bisa punya isinya session, request dan params</p>
-
-<p>MVC, Model View Controller. adalah sebuah concept yang ngebantu developer, memisahkan antara logic, design dan Representasi data storage. konsep ini keren bgt, apalagi kalo applikasi yang dikembangkan oleh team yang masing-masing udah punya job desc-nya sendiri - sendiri. Yang designer, urusannya di View, Programmer di Controller dan Model.</p>
-
-<p>Tapi terkadang, buat orang males kaya gue. suka nemuin case (mungkin lo juga sering nemuin). contoh : ada Model User, dan Post. Keduanya saling berelasi</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#model User</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="c1">#model Post</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>session yang merepresentasi kan user yang sudah login udah ada misal, di sebuah Controller kita dah definisikan ini</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UserController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
-</span><span class='line'>      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">({</span><span class="ss">:user_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">})</span>
-</span><span class='line'>      <span class="k">if</span> <span class="o">!</span><span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
-</span><span class='line'>          <span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
-</span><span class='line'>      <span class="k">else</span>
-</span><span class='line'>          <span class="c1">#FTW, Lupa cuyy ??</span>
-</span><span class='line'>          <span class="n">redirect_to</span> <span class="n">request</span><span class="o">.</span><span class="n">referer</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>(Anggep aja, males nulis code nya) kita sudah punya resource Posts. ketika user mau bikin post baru, masalahnya muncul. Mana yang lo pilih, Lo mendefnisikan user(yang udah login) yang belongs_to post lewat resource PostsController</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> 
-</span><span class='line'><span class="c1">#dalam PostController</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="vi">@post</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span>  <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-</span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>atau lo detect di Post (model) pake callback?</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#dalam model Post</span>
-</span><span class='line'><span class="n">before_save</span> <span class="ss">:detect_current_user</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">detect_current_user</span>
-</span><span class='line'>  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">]</span><span class="p">)</span> <span class="k">unless</span> <span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">].</span><span class="n">nil?</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="c1">#note, method controller ada klo ApplicationController dah di modif kaya snippet yang paling atas</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ini contoh sederhana aja. mungkin lo juga sering nemuin case yang lebih complex lagi yang membuat model harus bisa punya method request, sesssion, params langsung didalam model itu sendiri. tanpa harus passing argument ke model itu lewat controller</p>
-
-<p>Break MVC atau Mempermudah lo ??. gimana bijaksananya lo aja dalam ngoding, dan x-factor yang lo temuin dalam setiap development lo ..</p>
 
 		
-		
+		<a href="/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/" class="more-link">Read on &rarr;</a>
 	</div>
 
 
@@ -207,6 +123,17 @@ class ApplicationController &lt; ActionController::Base around_filter :_controll
 
     <article class="post">
 	<h1 class="title"><a href="/blog/2012/10/19/first-post/">First Post</a></h1>
+	<div class="meta">
+		<span class="date">2012-10-19 09:37:00 +0700</span>
+		<span class="tags">
+
+
+	<a class='category' href='/blog/categories/uncategories/'>Uncategories</a>
+
+
+</span>
+	    
+	</div>
 	<div class="entry-content">
 		<p>Hollaaa &#8230;</p>
 
