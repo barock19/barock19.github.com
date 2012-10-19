@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rails | $./rock]]></title>
+  <title><![CDATA[Category: rails | Rock]]></title>
   <link href="http://barock19.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://barock19.github.com/"/>
-  <updated>2012-10-19T10:49:58+07:00</updated>
+  <updated>2012-10-19T11:03:40+07:00</updated>
   <id>http://barock19.github.com/</id>
   <author>
     <name><![CDATA[Zidni Mubarock]]></name>
