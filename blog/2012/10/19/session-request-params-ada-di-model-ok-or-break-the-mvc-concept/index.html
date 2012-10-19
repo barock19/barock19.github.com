@@ -37,9 +37,6 @@
     protected
     def _controller_for_model
       accessor = instance_variable_get(:@_request)
-      cu = current_user
-      ou = office_user
-
       kelasess = [ActiveRecord::Base, ActiveRecord::Base.class]
 
       kelasess.each do |kelas|
