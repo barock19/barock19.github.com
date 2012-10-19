@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[$./rock]]></title>
+  <link href="http://rocks.github.com/atom.xml" rel="self"/>
+  <link href="http://rocks.github.com/"/>
+  <updated>2012-10-19T08:56:13+07:00</updated>
+  <id>http://rocks.github.com/</id>
+  <author>
+    <name><![CDATA[Zidni Mubarock]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[first time]]></title>
+    <link href="http://rocks.github.com/blog/2012/10/16/first-time/"/>
+    <updated>2012-10-16T14:32:00+07:00</updated>
+    <id>http://rocks.github.com/blog/2012/10/16/first-time</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Helll Yeahhh]]></title>
+    <link href="http://rocks.github.com/blog/2012/10/16/title/"/>
+    <updated>2012-10-16T14:09:00+07:00</updated>
+    <id>http://rocks.github.com/blog/2012/10/16/title</id>
+    <content type="html"><![CDATA[<p>The title is derived from the filename so you’ll likely want to change that. This is very similar to the post yaml except it doesn’t include categories, and you can toggle sharing and comments or remove the footer altogether. If you don’t want to show a date on your page, just remove it from the yaml.
+The title is derived from the filename so you’ll likely want to change that. This is very similar to the post yaml except it doesn’t include categories, and you can toggle sharing and comments or remove the footer altogether. If you don’t want to show a date on your page, just remove it from the yaml.
+The title is derived from the filename so you’ll likely want to change that. This is very similar to the post yaml except it doesn’t include categories, and you can toggle sharing and comments or remove the footer altogether. If you don’t want to show a date on your page, just remove it from the yaml.</p>
+
+<pre><code>    def ck_upload
+
+       uploaded_io = params[:upload]
+       cKEditor    = params[:CKEditor] ;
+        funcNum     = params[:CKEditorFuncNum] ;
+        langCode    = params[:langCode] ;
+       ext =  uploaded_io.content_type.split('/').last
+       file_name = Digest::SHA1.hexdigest(Time.now.to_s)+'.'+ext
+       file_path = Rails.root.join('public', 'uploads', file_name)
+       message = ''
+
+       begin
+         File.open(file_path, 'wb') do |file|
+           file.write(uploaded_io.read)
+         end
+       rescue Exception =&gt; e
+         message = e
+       end
+       url = public_url file_path
+       render :text =&gt; "&lt;script type='text/javascript'&gt; window.parent.CKEDITOR.tools.callFunction('#{funcNum}', '#{url}', '#{message}')&lt;/script&gt;";
+
+    end
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
