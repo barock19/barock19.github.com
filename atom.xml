@@ -4,7 +4,7 @@
   <title><![CDATA[Rock]]></title>
   <link href="http://barock19.github.com/atom.xml" rel="self"/>
   <link href="http://barock19.github.com/"/>
-  <updated>2012-10-19T11:53:15+07:00</updated>
+  <updated>2012-10-19T14:51:58+07:00</updated>
   <id>http://barock19.github.com/</id>
   <author>
     <name><![CDATA[Zidni Mubarock]]></name>
@@ -18,83 +18,144 @@
     <link href="http://barock19.github.com/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept/"/>
     <updated>2012-10-19T09:45:00+07:00</updated>
     <id>http://barock19.github.com/blog/2012/10/19/session-request-params-ada-di-model-ok-or-break-the-mvc-concept</id>
-    <content type="html"><![CDATA[<pre><code>class ApplicationController &lt; ActionController::Base
-    around_filter :_controller_for_model
+    <content type="html"><![CDATA[
 
-    ....
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">around_filter</span> <span class="ss">:_controller_for_model</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">_controller_for_model</span>
+</span><span class='line'>    <span class="n">accessor</span> <span class="o">=</span> <span class="nb">instance_variable_get</span><span class="p">(</span><span class="ss">:@_request</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">kelasess</span> <span class="o">=</span> <span class="o">[</span><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">,</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">class</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">kelasess</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">kelas</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">kelas</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:define_method</span><span class="p">,</span> <span class="s2">&quot;controller&quot;</span><span class="p">,</span> <span class="nb">proc</span> <span class="p">{</span><span class="n">accessor</span><span class="p">})</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="k">yield</span>
+</span><span class='line'>    <span class="n">kelasess</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">kelas</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">kelas</span><span class="o">.</span><span class="n">send</span> <span class="ss">:remove_method</span><span class="p">,</span> <span class="s2">&quot;controller&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    protected
-    def _controller_for_model
-      accessor = instance_variable_get(:@_request)
-      kelasess = [ActiveRecord::Base, ActiveRecord::Base.class]
-
-      kelasess.each do |kelas|
-        kelas.send(:define_method, "controller", proc {accessor})
-      end
-      yield
-      kelasess.each do |kelas|
-        kelas.send :remove_method, "controller"
-      end
-
-    end
-end
-</code></pre>
 
 <p>klo lo modif ApplicationController kaya diatas, Model lo bakal punya method controller yang bisa punya isinya session, request dan params</p>
 
 <p>MVC, Model View Controller. adalah sebuah concept yang ngebantu developer, memisahkan antara logic, design dan Representasi data storage. konsep ini keren bgt, apalagi kalo applikasi yang dikembangkan oleh team yang masing-masing udah punya job desc-nya sendiri - sendiri. Yang designer, urusannya di View, Programmer di Controller dan Model.</p>
 
-<p>Tapi terkadang, buat orang males kaya gue. suka nemuin case (mungkin lo juga sering nemuin). contoh :</p>
+<p>Tapi terkadang, buat orang males kaya gue. suka nemuin case (mungkin lo juga sering nemuin). contoh : ada Model User, dan Post. Keduanya saling berelasi</p>
 
-<p>ada Model User, dan Post. Keduanya saling berelasi</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#model User</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:posts</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#model Post</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>#model User
-class User &lt; ActiveRecord::Base 
-    has_many :posts
-end
-#model Post
-class Post &lt; ActiveRecord::Base 
-    belongs_to :user
-end
-</code></pre>
 
 <p>session yang merepresentasi kan user yang sudah login udah ada misal, di sebuah Controller kita dah definisikan ini</p>
 
-<pre><code>class UserController &lt; ApplicationController
-    def auth
-        user = User.where({:user_name =&gt; params[:user], :password =&gt; params[:password]})
-        if !user.nil?
-            session[:current_user_id] = user.id
-        else
-            #FTW, Lupa cuyy ??
-            redirect_to request.referer
-        end
-    end
-    ....
-end
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UserController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">auth</span>
+</span><span class='line'>      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">({</span><span class="ss">:user_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">,</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">})</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">!</span><span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
+</span><span class='line'>          <span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">]</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>          <span class="c1">#FTW, Lupa cuyy ??</span>
+</span><span class='line'>          <span class="n">redirect_to</span> <span class="n">request</span><span class="o">.</span><span class="n">referer</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>(Anggep aja, males nulis code nya) kita sudah punya resource Posts. ketika user mau bikin post baru, masalahnya muncul. Mana yang lo pilih, Lo mendefnisikan user(yang udah login) yang belongs_to post lewat resource PostsController</p>
 
-<pre><code>#dalam PostController
-def create
-  @post = post.new(params[:post])
-@post.user =  User.find(session[:current_user_id])
-  respond_to do |format|
-    ....
-  end
-end
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> 
+</span><span class='line'><span class="c1">#dalam PostController</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:post</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@post</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span>  <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>atau lo detect di Post (model) pake callback?</p>
 
-<pre><code>#dalam model Post
-before_save :detect_current_user
-def detect_current_user
-    user = User.find(controller.session[:current_user_id]) unless session[:current_user_id].nil?
-end
-#note, method controller ada klo ApplicationController dah di modif kaya snippet yang paling atas
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#dalam model Post</span>
+</span><span class='line'><span class="n">before_save</span> <span class="ss">:detect_current_user</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">detect_current_user</span>
+</span><span class='line'>  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">]</span><span class="p">)</span> <span class="k">unless</span> <span class="n">session</span><span class="o">[</span><span class="ss">:current_user_id</span><span class="o">].</span><span class="n">nil?</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="c1">#note, method controller ada klo ApplicationController dah di modif kaya snippet yang paling atas</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>ini contoh sederhana aja. mungkin lo juga sering nemuin case yang lebih complex lagi yang membuat model harus bisa punya method request, sesssion, params langsung didalam model itu sendiri. tanpa harus passing argument ke model itu lewat controller</p>
 
