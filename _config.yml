@@ -7,6 +7,11 @@ baseurl: ""
 url: "http://barock19.github.io"
 google_analytics:
 show_related_posts: false
+show_social_icons: true
+github_username: barock19
+twitter_username: barock19
+linkedin_username: barock19
+google_plus_id: +ZidniMubarock
 
 # Build settings
 markdown: kramdown

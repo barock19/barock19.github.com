@@ -1,6 +1,25 @@
 .about-self-potrait
-  width: 250px
+  width: 80%
   border-right: 1px #eee solid
   padding-right: 20px
   margin-right: 20px
-  float: left
+.row
+  &:before, &:after
+    display: table
+    content: ""
+  &:after
+    clear: both
+
+  > .col
+    float: left
+article.about-page
+  .row >
+    .col:first-child
+      width: 30%
+    .col:last-child
+      width: 70%
+  h1.h2
+    margin: 0px
+    border-bottom: 1px solid #eee
+    margin-bottom: 20px
+
