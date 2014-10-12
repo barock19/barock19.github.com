@@ -19,6 +19,9 @@ layout: default
 <article class="post-content">
   {{ content }}
 </article>
+{% if page.comment %}
+  {% include comment.html %}
+{% endif %}
 
 {% if site.show_related_posts %}
   <h3 class="related-post-title">Related Posts</h3>
@@ -31,3 +34,4 @@ layout: default
     </div>
   {% endfor %}
 {% endif %}
+

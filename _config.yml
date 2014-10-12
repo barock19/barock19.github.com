@@ -1,12 +1,11 @@
 # Site settings
-title: Pixyll
-email: your_email@example.com
-author: John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title: Barock19
+email: zidmubarock@gmail.com
+author: Zidni Mubarock
+description: "Rock is Rock"
 baseurl: ""
-url: "http://pixyll.com"
+url: "http://barock19.github.io"
 google_analytics:
-animated: false
 show_related_posts: false
 
 # Build settings
