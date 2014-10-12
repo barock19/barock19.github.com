@@ -6,9 +6,7 @@ summary:    thought
 comment: true
 categories: Ruby Rails
 ---
-
-Code blocks use the [solarized](http://ethanschoonover.com/solarized) theme. Both the light and
-dark versions are included, so you can swap them out easily. _Solarized Dark_ is the default.
+berikut contoh application_controller.rb
 
 {% highlight ruby %}
 class ApplicationController < ActionController::Base
